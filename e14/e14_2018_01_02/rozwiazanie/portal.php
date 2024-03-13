@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="pl">
 <head>
-	<meta charset="UTF-8" />
+	<meta charset="UTF-8" >
 	<title>Ogłoszenia drobne</title>
-	<link rel="stylesheet" href="styl2.css" />
+	<link rel="stylesheet" href="styl2.css" >
 </head>
 <body>
 	<div id="baner">
@@ -12,18 +12,37 @@
 	<div id="lewy">
 		<h2>Ogłoszeniodawcy</h2>
 		<?php
-		$con = mysqli_connect('localhost', 'root', '', 'ogloszenia');
-		$kw1 = "SELECT id, imie, nazwisko, email FROM uzytkownik WHERE id < 4";
-		$kw2 = "SELECT tytul FROM ogloszenie LIMIT 1";
-		$res = mysqli_query($con, $kw1);
-		$res2 = mysqli_query($con, $kw2);
-		while($tab = mysqli_fetch_row($res)) {
-			$tab2 = mysqli_fetch_row($res2);
-			echo "<h3>$tab[0] $tab[1] $tab[2]</h3>";
-			echo "<p>$tab[3]</p>";
-			echo "<p>Ogłoszenie: $tab2[0]</p>";
+		$id_polaczenia = mysqli_connect('localhost', 'root', '', 'ogloszenia');
+		$zapytanie =<<<KONIEC
+		SELECT
+			id,
+			imie,
+			nazwisko,
+			email
+		FROM
+			uzytkownik
+		WHERE
+			id < 4;
+		KONIEC;
+		$wynik = mysqli_query($id_polaczenia, $zapytanie);
+		while($row = mysqli_fetch_array($wynik)) {
+			$id = $row['id'];
+			$imie = $row['imie'];
+			$nazwisko = $row['nazwisko'];
+			$email = $row['email'];
+			$zapytanie = <<<KONIEC
+			SELECT tytul FROM ogloszenie WHERE id = $id LIMIT 1;
+			KONIEC;
+			$wynik1 = mysqli_query($id_polaczenia, $zapytanie);
+			$row = mysqli_fetch_array($wynik1);
+			$tytul = $row['tytul'];
+			echo <<<KONIEC
+			<h3>$id $imie $nazwisko</h3>
+			<p>$email</p>
+			<p>Ogłoszenie: $tytul</p>
+			KONIEC;
 		}
-		mysqli_close($con);
+		mysqli_close($id_polaczenia);
 		?>
 	</div>
 	<div id="prawy">
@@ -33,7 +52,7 @@
 			<li>Muzyka</li>
 			<li>Multimedia</li>
 		</ul>
-		<img src="ksiazki.jpg" alt="uwolnij swoją książkę" />
+		<img src="ksiazki.jpg" alt="uwolnij swoją książkę" >
 		<table>
 			<tr>
 				<td>Ile?</td>
