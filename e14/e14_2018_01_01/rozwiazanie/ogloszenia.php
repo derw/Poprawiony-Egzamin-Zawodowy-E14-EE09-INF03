@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="ITF-8" />
+	<meta charset="ITF-8" >
 	<title>Portal ogłoszeniowy</title>
-	<link rel="stylesheet" href="styl1.css" />
+	<link rel="stylesheet" href="styl1.css" >
 </head>
 <body>
 	<div id="baner">
@@ -16,7 +16,7 @@
 			<li>Muzyka</li>
 			<li>Filmy</li>
 		</ol>
-		<img src="ksiazki.jpg" alt="Kupię / sprzedam książkę" />
+		<img src="ksiazki.jpg" alt="Kupię / sprzedam książkę" >
 		<table>
 			<tr>
 				<td>Liczba ogłoszeń</td>
@@ -41,18 +41,45 @@
 	<div id="prawy">
 		<h2>Ogłoszenia kategorii książka</h2>
 		<?php
-		$con = mysqli_connect('localhost', 'root', '', 'ogloszenia');
-		$kw1 = "SELECT id, tytul, tresc FROM ogloszenie WHERE kategoria = 1;";
-		$kw2 = "SELECT telefon FROM uzytkownik, ogloszenie WHERE uzytkownik.id = ogloszenie.uzytkownik_id;";
-		$res1 = mysqli_query($con, $kw1);
-		$res2 = mysqli_query($con, $kw2);
-		while($tab = mysqli_fetch_row($res1)) {
-			$tab2 = mysqli_fetch_row($res2);
-			echo "<h3>$tab[0] $tab[1]</h3>";
-			echo "<p>$tab[2]</p>";
-			echo "<p>telefon kontaktowy: $tab2[0]</p>";
+		$id_polaczenia = mysqli_connect('localhost', 'root', '', 'ogloszenia');
+		$zapytanie = <<<KONIEC
+		SELECT
+			id,
+			tytul,
+			tresc
+		FROM
+			ogloszenie
+		WHERE
+			kategoria=1
+		KONIEC;
+		$wynik = mysqli_query($id_polaczenia, $zapytanie);
+		while($row = mysqli_fetch_array($wynik)) {
+			$id_ogloszenia = $row['id'];
+			$tytul = $row['tytul'];
+			$tresc = $row['tresc'];
+			$zapytanie = <<<KONIEC
+			SELECT
+				u.telefon
+			FROM
+				ogloszenie AS o
+			JOIN
+				uzytkownik AS u
+			ON
+				o.uzytkownik_id = u.id
+			WHERE
+				o.id = $id_ogloszenia;
+			KONIEC;
+
+			$wynik2 = mysqli_query($id_polaczenia, $zapytanie);
+			$row = mysqli_fetch_array($wynik2);
+			$telefon = $row['telefon'];
+			echo <<<KONIEC
+			<h3>$id_ogloszenia $tytul</h3>
+			<p>$tresc</p>
+			<p>telefon kontaktowy: $telefon</p>
+			KONIEC;
 		}
-		mysqli_close($con);
+		mysqli_close($id_polaczenia);
 		?>
 	</div>
 	<div id="stopka">
