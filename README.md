@@ -6,6 +6,8 @@ Przy użyciu zmiennych napisowych zawierających zapytania SQL łatwo popełnić
 
 Również budowanie snippetów HTML wypełnianych danymi z krotek może prowadzić do popełnienia błędów. Zdecydowanie łatwiej jest korzystać z metody heredoc. Przygotowanie wyglądu tabeli, listy czy dowolnego innego elementu HTML poza skryptem PHP, a następnie dopiero po uzyskaniu odpowiedniego wyglądu dołączenie do pętli wypełniającej danymi z krotek, może znacznie ułatwić proces i zmniejszyć ryzyko popełnienia błędów, zwłaszcza dla osób początkujących w programowaniu.
 
+https://www.php.net/manual/en/language.types.string.php#language.types.string.syntax.heredoc
+
 ```PHP
                 <?php
                 $con = mysqli_connect('localhost', 'root', '', 'wynajem');
@@ -24,11 +26,11 @@ Również budowanie snippetów HTML wypełnianych danymi z krotek może prowadzi
 
 Do tej pory poprawione są rozwiązania dotyczące PHP:
 
-e14_2018_01_01
-e14_2018_01_02
-e14_2018_01_03
-e14_2018_01_04
-e14_2018_06_01
+- e14_2018_01_01
+- e14_2018_01_02
+- e14_2018_01_03
+- e14_2018_01_04
+- e14_2018_06_01
 
 ## Technik informatyk - egzamin zawodowy E.14/EE.09/INF.03
 Arkusze z plikami wraz z rozwiazaniami napisanymi przeze mnie.
