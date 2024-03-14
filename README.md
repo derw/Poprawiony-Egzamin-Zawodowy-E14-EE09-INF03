@@ -1,3 +1,35 @@
+**Propozycja do przemyślenia**
+
+Rozwiązania pierwotne mogą działać poprawnie, ale są trudne do zrozumienia dla osób, które dopiero rozpoczynają naukę programowania. Moja propozycja nie tylko jest czytelniejsza do nauki, ale także ułatwia pracę podczas egzaminów. Używanie indeksów numerycznych w tablicach zawierających odpowiedzi z bazy danych jest nieczytelne i stwarza ryzyko popełnienia drobnych błędów, co często prowadzi do przedłużenia czasu pracy nad skryptami PHP podczas egzaminu.
+
+Przy użyciu zmiennych napisowych zawierających zapytania SQL łatwo popełnić błędy. Dla osób początkujących, pomyłka w użyciu cudzysłowów zazwyczaj prowadzi do konieczności przeszukiwania błędów nie tylko w przygotowanym zapytaniu, ale nawet w samej bazie danych. Szczególnie, że rodzaj użytego cudzysłowu to nie jedyny błąd, jaki może popełnić niedoświadczony programista piszący zapytania SQL w skryptach PHP.
+
+Również budowanie snippetów HTML wypełnianych danymi z krotek może prowadzić do popełnienia błędów. Zdecydowanie łatwiej jest korzystać z metody heredoc. Przygotowanie wyglądu tabeli, listy czy dowolnego innego elementu HTML poza skryptem PHP, a następnie dopiero po uzyskaniu odpowiedniego wyglądu dołączenie do pętli wypełniającej danymi z krotek, może znacznie ułatwić proces i zmniejszyć ryzyko popełnienia błędów, zwłaszcza dla osób początkujących w programowaniu.
+
+```PHP
+                <?php
+                $con = mysqli_connect('localhost', 'root', '', 'wynajem');
+                $q = "SELECT * FROM pokoje";
+                $res = mysqli_query($con, $q);
+                while ($row = mysqli_fetch_array($res)) {
+                    echo "<tr>
+                            <td>$row[0]</td>
+                            <td>$row[1]</td>
+                            <td>$row[2]</td>
+                        </tr>";
+                }
+                mysqli_close($con);
+                ?>
+```
+
+Do tej pory poprawione są rozwiązania dotyczące PHP:
+
+e14_2018_01_01
+e14_2018_01_02
+e14_2018_01_03
+e14_2018_01_04
+e14_2018_06_01
+
 ## Technik informatyk - egzamin zawodowy E.14/EE.09/INF.03
 Arkusze z plikami wraz z rozwiazaniami napisanymi przeze mnie.
 
