@@ -36,7 +36,7 @@ Do tej pory poprawione są rozwiązania dotyczące PHP:
 - e14_2018_06_06
 
 - e14_2019_01_01
-
+- e14_2019_01_02
 
 - ee09_2022_01_05
 
