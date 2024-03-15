@@ -32,6 +32,8 @@ Do tej pory poprawione są rozwiązania dotyczące PHP:
 - e14_2018_01_04
 - e14_2018_06_01
 
+- ee09_2022_01_05
+
 ## Technik informatyk - egzamin zawodowy E.14/EE.09/INF.03
 Arkusze z plikami wraz z rozwiazaniami napisanymi przeze mnie.
 
