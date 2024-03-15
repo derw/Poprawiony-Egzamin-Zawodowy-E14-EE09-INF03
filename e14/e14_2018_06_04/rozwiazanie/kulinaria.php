@@ -1,46 +1,75 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8" />
+	<meta charset="UTF-8" >
 	<title>Restauracja Kulinaria.pl</title>
-	<link rel="stylesheet" href="styl4.css" />
+	<link rel="stylesheet" href="styl4.css" >
 </head>
 <body>
 	<div id="baner">
 		<h2>Restauracja Kulinaria.pl Zaprasza!</h2>
 	</div>
 	<div id="lewy">
-		<p>Dania mięsne zamówiesz już od 
 		<?php
-		$con = mysqli_connect('localhost', 'root', '', 'baza');
-		$kw1 = "SELECT MIN(cena) FROM dania WHERE typ = 2";
-		$res1 = mysqli_query($con, $kw1);
-		while($tab = mysqli_fetch_row($res1)) echo "$tab[0]";
+		$id_polaczenia = mysqli_connect('localhost', 'root', '', 'baza');
+		$zapytanie = <<<KONIEC
+		SELECT MIN(cena) AS min FROM dania WHERE typ = 2
+		KONIEC;
+		$wynik = mysqli_query($id_polaczenia, $zapytanie);
+		$row = mysqli_fetch_array($wynik);
+		echo <<<KONIEC
+		<p>Dania mięsne zamówiesz już od $row[min] złotych</p>
+		KONIEC;
 		?>
-		 złotych</p>
-		 <img src="menu.jpg" alt="Pyszne spaghetti" />
-		 <br/>
+		 <img src="menu.jpg" alt="Pyszne spaghetti" >
+		 <br>
 		 <a href="menu.jpg">Pobierz obraz</a>
 	</div>
 	<div id="srodkowy">
 		<h3>Przekąski</h3>
 		<?php
-		$kw2 = "SELECT id, nazwa, cena FROM dania WHERE typ = 3";
-		$res2 = mysqli_query($con, $kw2);
-		while($tab = mysqli_fetch_row($res2)) {
-			echo "<p>$tab[0] $tab[1] $tab[2]</p>";
+		$zapytanie = <<<KONIEC
+		SELECT
+			id,
+			nazwa,
+			cena
+		FROM
+			dania
+		WHERE
+			typ = 3
+		KONIEC;
+		$res2 = mysqli_query($id_polaczenia, $zapytanie);
+		while($row = mysqli_fetch_array($res2)) {
+			$id = $row['id'];
+			$nazwa = $row['nazwa'];
+			$cena = $row['cena'];
+
+			echo "<p>$id $nazwa $cena</p>";
 		}
 		?>
 	</div>
 	<div id="prawy">
 		<h3>Napoje</h3>
 		<?php
-		$kw3 = "SELECT id, nazwa, cena FROM dania WHERE typ = 4";
-		$res3 = mysqli_query($con, $kw3);
-		while($tab = mysqli_fetch_row($res3)) {
-			echo "<p>$tab[0] $tab[1] $tab[2]</p>";
+		$zapytanie = <<<KONIEC
+		SELECT
+			id,
+			nazwa,
+			cena
+		FROM
+			dania
+		WHERE
+			typ = 4
+		KONIEC;
+		$wynik = mysqli_query($id_polaczenia, $zapytanie);
+		while($row = mysqli_fetch_array($wynik)) {
+			$id = $row['id'];
+			$nazwa = $row['nazwa'];
+			$cena = $row['cena'];
+
+			echo "<p>$id $nazwa $cena</p>";
 		}
-		mysqli_close($con);
+		mysqli_close($id_polaczenia);
 		?>
 	</div>
 	<div id="stopka">
