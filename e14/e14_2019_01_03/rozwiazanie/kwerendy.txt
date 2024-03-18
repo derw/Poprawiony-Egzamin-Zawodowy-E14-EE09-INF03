@@ -1,4 +1,35 @@
-1. SELECT tytul, rok, ocena FROM filmy, gatunki WHERE filmy.gatunki_id = gatunki.id AND gatunki.nazwa = 'komedia';
-2. SELECT filmy.id, filmy.tytul, rezyserzy.imie, rezyserzy.nazwisko FROM filmy, rezyserzy WHERE filmy.rezyserzy_id = rezyserzy.id;
-3. SELECT id, tytul FROM filmy WHERE rok = 2017 AND id = 6;
-4. UPDATE rezyserzy SET imie = 'Francis Ford' WHERE id = 8;
+1.
+SELECT
+    tytul,
+    rok,
+    ocena
+FROM
+    filmy
+WHERE
+    gatunki_id = 5;
+2.
+SELECT
+    f.id,
+    f.tytul,
+    r.imie,
+    r.nazwisko
+FROM
+    filmy AS f
+JOIN rezyserzy AS r
+ON
+    f.rezyserzy_id = r.id;
+3.
+SELECT
+    id,
+    tytul
+FROM
+    filmy
+WHERE
+    rok = 2017 AND ocena = 5;
+4.
+UPDATE
+    rezyserzy
+SET
+    imie = 'Francis Ford'
+WHERE
+    id = 8;

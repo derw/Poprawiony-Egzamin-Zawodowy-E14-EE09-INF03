@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="UTF-8" />
+	<meta charset="UTF-8">
 	<title>Filmoteka</title>
-	<link rel="stylesheet" href="styl3.css" />
+	<link rel="stylesheet" href="styl3.css">
 </head>
+
 <body>
 	<div id="pierwszy">
-		<img src="klaps.png" alt="Nasze filmy" />
+		<img src="klaps.png" alt="Nasze filmy">
 	</div>
 	<div id="drugi">
 		<h1>BAZA FILMÓW</h1>
@@ -15,28 +17,42 @@
 	<div id="trzeci">
 		<form action="index.php" method="post">
 			<select name="wybor">
-				<option value="Sci-Fi">Sci-Fi</option>
-				<option value="animacja">animacja</option>
-				<option value="dramat">dramat</option>
-				<option value="horror">horror</option>
-				<option value="komedia">komedia</option>
+				<option value="1">Sci-Fi</option>
+				<option value="2">animacja</option>
+				<option value="3">dramat</option>
+				<option value="4">horror</option>
+				<option value="5">komedia</option>
 			</select>
 			<button type="submit">Filmy</button>
 		</form>
 	</div>
 	<div id="czwarty">
-		<img src="gwiezdneWojny.jpg" alt="szturmowcy" />
+		<img src="gwiezdneWojny.jpg" alt="szturmowcy">
 	</div>
 	<div id="glowny1">
 		<h2>Wybrano filmy:</h2>
 		<?php
-		$con = mysqli_connect('localhost', 'root', '', 'dane');
-		if(isset($_POST['wybor'])) {
+		$id_polaczenia = mysqli_connect('localhost', 'root', '', 'dane');
+		if (isset($_POST['wybor'])) {
 			$wybor = $_POST['wybor'];
-			$kw1 = "SELECT tytul, rok, ocena FROM filmy, gatunki WHERE filmy.gatunki_id = gatunki.id AND gatunki.nazwa = '$wybor';";
-			$res1 = mysqli_query($con, $kw1);
-			while($tab = mysqli_fetch_row($res1)) {
-				echo "<p>Tytuł: $tab[0], Rok produkcji: $tab[1], Ocena: $tab[2]</p>";
+			$zapytanie = <<<KONIEC
+			SELECT
+				`tytul`,
+				`rok`,
+				`ocena`
+			FROM
+				`filmy`
+			WHERE
+				`gatunki_id` = $wybor
+			KONIEC;
+			$wynik = mysqli_query($id_polaczenia, $zapytanie);
+			while ($row = mysqli_fetch_array($wynik)) {
+				$tytul = $row['tytul'];
+				$rok = $row['rok'];
+				$ocena = $row['ocena'];
+				echo <<<KONIEC
+				<p>Tytuł: $tytul, Rok produkcji: $rok, Ocena: $ocena</p>
+				KONIEC;
 			}
 		}
 		?>
@@ -44,12 +60,29 @@
 	<div id="glowny2">
 		<h2>Wybrano filmy:</h2>
 		<?php
-		$kw2 = "SELECT filmy.id, filmy.tytul, rezyserzy.imie, rezyserzy.nazwisko FROM filmy, rezyserzy WHERE filmy.rezyserzy_id = rezyserzy.id;";
-		$res2 = mysqli_query($con, $kw2);
-		while($tab = mysqli_fetch_row($res2)) {
-				echo "<p>$tab[0].$tab[1], reżyseria: $tab[2] $tab[3]</p>";
-			}
-		mysqli_close($con);
+		$zapytanie = <<<KONIEC
+		/var/www/html/egzamin/Poprawiony-Egzamin-Zawodowy-E14-EE09-INF03/e14/e14_2019_01_03/rozwiazanie/index.php		SELECT
+			f.id,
+			f.tytul,
+			r.imie,
+			r.nazwisko
+		FROM
+			filmy AS f
+		JOIN rezyserzy AS r
+		ON
+			f.rezyserzy_id = r.id;
+		KONIEC;
+		$wynik = mysqli_query($id_polaczenia, $zapytanie);
+		while ($row = mysqli_fetch_array($wynik)) {
+			$id = $row['id'];
+			$tytul = $row['tytul'];
+			$imie = $row['imie'];
+			$nazwisko = $row['nazwisko'];
+			echo <<<KONIEC
+				<p>$id.$tytul, reżyseria: $imie $nazwisko</p>
+			KONIEC;
+		}
+		mysqli_close($id_polaczenia);
 		?>
 	</div>
 	<div id="stopka">
@@ -58,4 +91,5 @@
 		<a href="http://filmy.pl">Przejdź do filmy.pl</a>
 	</div>
 </body>
+
 </html>
