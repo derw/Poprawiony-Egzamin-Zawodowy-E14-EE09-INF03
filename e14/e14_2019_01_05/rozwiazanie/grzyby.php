@@ -59,23 +59,23 @@
 		<?php
 		$zapytanie = <<<KONIEC
 		SELECT
-			g.nazwa,
-			g.potoczna,
-			r.nazwa AS rodzina
+			grzyby.nazwa,
+			`potoczna`,
+			rodzina.nazwa
 		FROM
-			grzyby AS g
-		JOIN rodzina AS r
-		ON
-			g.rodzina_id = r.id
+			`grzyby`
+			JOIN
+			rodzina
+			ON grzyby.rodzina_id=rodzina.id
 		WHERE
-			g.potrawy_id = 1
+			grzyby.potrawy_id = 1
 		KONIEC;
 		$wynik = mysqli_query($id_polaczenia, $zapytanie);
 		echo "<ol>";
 		while ($row = mysqli_fetch_array($wynik)) {
 			$nazwa = $row['nazwa'];
 			$potoczna = $row['potoczna'];
-			$rodzina = $row['rodzina'];
+			$rodzina = $row['nazwa'];
 			echo <<<KONIEC
 			<li>$nazwa ($potoczna), rodzina: $rodzina</li>
 			KONIEC;

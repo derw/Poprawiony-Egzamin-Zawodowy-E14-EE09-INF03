@@ -36,6 +36,8 @@ Do tej pory poprawione są rozwiązania dotyczące PHP:
 - e14_2018_06_06
 - e14_2019_01_03
 - e14_2019_01_04
+- e14_2019_01_05
+- e14_2019_01_06 – PHP, ciasteczka, js, grafika
 
 - e14_2019_01_01
 - e14_2019_01_02

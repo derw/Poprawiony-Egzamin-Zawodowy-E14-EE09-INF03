@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="pl">
 <head>
-	<meta charset="UTF-8" />
+	<meta charset="UTF-8">
 	<title>Podróże dalekie i bliskie</title>
-	<link rel="stylesheet" href="styl6.css" />
+	<link rel="stylesheet" href="styl6.css">
 </head>
 <body>
 	<div id="baner">
@@ -22,12 +22,12 @@
 	<div id="lewy">
 		<table>
 			<tr>
-				<td><img src="polska.jpg" alt="zwiedzanie Krakowa" /></td>
-				<td><img src="wlochy.jpg" alt="Wenecja i nie tylko" /></td>
+				<td><img src="polska.jpg" alt="zwiedzanie Krakowa"></td>
+				<td><img src="wlochy.jpg" alt="Wenecja i nie tylko"></td>
 			</tr>
 			<tr>
-				<td><img src="grecja.jpg" alt="gorące Greckie wyspy" /></td>
-				<td><img src="hiszpania.jpg" alt="Słoneczna Barcelona" /></td>
+				<td><img src="grecja.jpg" alt="gorące Greckie wyspy"></td>
+				<td><img src="hiszpania.jpg" alt="Słoneczna Barcelona"></td>
 			</tr>
 		</table>
 	</div>
