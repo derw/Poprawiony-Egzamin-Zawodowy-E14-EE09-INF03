@@ -1,4 +1,28 @@
-1. SELECT podzespoly.nazwa, podzespoly.dostepnosc, podzespoly.cena FROM podzespoly, producenci WHERE podzespoly.producenci_id = producenci.id AND producenci.nazwa = 'ADATA';
-2. SELECT podzespoly.id, podzespoly.opis FROM podzespoly, producenci WHERE podzespoly.producenci_id = producenci.id AND dostepnosc = 0 AND producenci.nazwa IN ('Intel', 'AMD');
-3. SELECT podzespoly.opis, podzespoly.cena, producenci.nazwa FROM podzespoly, producenci WHERE podzespoly.producenci_id = producenci.id;
+1. 
+SELECT
+    podzespoly.nazwa,
+    podzespoly.dostepnosc,
+    podzespoly.cena
+FROM
+    podzespoly
+WHERE
+    podzespoly.producenci_id = 5
+2.
+SELECT
+    podzespoly.id,
+    podzespoly.opis
+FROM
+    podzespoly
+JOIN producenci ON podzespoly.producenci_id = producenci.id
+WHERE
+    podzespoly.dostepnosc = 0 AND producenci.nazwa IN('Intel', 'AMD');
+3.
+SELECT
+    podzespoly.id,
+    podzespoly.opis
+FROM
+    podzespoly
+JOIN producenci ON podzespoly.producenci_id = producenci.id
+WHERE
+    podzespoly.dostepnosc = 0 AND producenci.nazwa IN('Intel', 'AMD');
 4. ALTER TABLE producenci ADD COLUMN (priorytet INT);

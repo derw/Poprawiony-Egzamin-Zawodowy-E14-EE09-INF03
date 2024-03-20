@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="UTF-8" />
+	<meta charset="UTF-8">
 	<title>Hurtownia komputerowa</title>
-	<link rel="stylesheet" href="styl2.css" />
+	<link rel="stylesheet" href="styl2.css">
 </head>
+
 <body>
 	<div id="lista">
 		<ul>
@@ -27,30 +29,52 @@
 		<h1>Dystrybucja sprzętu komputerowego</h1>
 		<form action="hurtownia.php" method="post">
 			<label>
-				Wybierz producenta<br/>
-				<input type="number" name="producent" />
+				Wybierz producenta<br>
+				<select name="producent">
+					<option value="1">Intel</option>
+					<option value="2">AMD</option>
+					<option value="3">Motorola</option>
+					<option value="4">Corsair</option>
+					<option value="5">ADATA</option>
+					<option value="6">WD</option>
+					<option value="7">Kingstone</option>
+					<option value="8">Patriot</option>
+					<option value="9">Asus</option>
+				</select>
 			</label>
 			<button type="submit">WYŚWIETL</button>
 		</form>
 	</div>
 	<div id="logo">
-		<img src="sprzet.png" alt="Sprzedajemy komputery" />
+		<img src="sprzet.png" alt="Sprzedajemy komputery">
 	</div>
 	<div id="glowny">
 		<h2>Podzespoły wybranego producenta</h2>
 		<?php
-		$con = mysqli_connect('localhost', 'root', '', 'sklep');
-		if(!empty($_POST['producent'])) {
+		$id_polaczenia = mysqli_connect('localhost', 'root', '', 'sklep');
+		if (!empty($_POST['producent'])) {
 			$producent = $_POST['producent'];
-			$kw = "SELECT podzespoly.nazwa, podzespoly.dostepnosc, podzespoly.cena FROM podzespoly, producenci WHERE podzespoly.producenci_id = producenci.id AND producenci.id = $producent;";
-			$res = mysqli_query($con, $kw);
-			while($tab = mysqli_fetch_row($res)) {
-				$dostepnosc = "NIEDOSTĘPNY";
-				if($tab[1] == '1') $dostepnosc = "DOSTĘPNY";
-				echo "<p>$tab[0] CENA: $tab[2] $dostepnosc</p>";
+			$zapytanie = <<<KONIEC
+			SELECT
+				podzespoly.nazwa,
+				podzespoly.dostepnosc,
+				podzespoly.cena
+			FROM
+				podzespoly
+			WHERE
+				podzespoly.producenci_id = $producent;
+			KONIEC;
+			$wynik = mysqli_query($id_polaczenia, $zapytanie);
+			while ($row = mysqli_fetch_array($wynik)) {
+				$nazwa = $row['nazwa'];
+				$cena = $row['cena'];
+				$dostepnosc = $row['dostepnosc'] == 1 ? "DOSTĘPNY" : "NIEDOSTĘPNY";
+				echo <<<KONIEC
+				<p>$nazwa CENA: $cena $dostepnosc</p>
+				KONIEC;
 			}
 		}
-		mysqli_close($con);
+		mysqli_close($id_polaczenia);
 		?>
 	</div>
 	<div id="stopka">
@@ -62,4 +86,5 @@
 		<p>Stronę wykonał: PESEL</p>
 	</div>
 </body>
+
 </html>
