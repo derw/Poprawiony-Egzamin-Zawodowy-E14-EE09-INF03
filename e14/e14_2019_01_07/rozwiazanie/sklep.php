@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="UTF-8" />
+	<meta charset="UTF-8">
 	<title>Hutrtownia</title>
-	<link rel="stylesheet" href="styl1.css" />
+	<link rel="stylesheet" href="styl1.css">
 </head>
+
 <body>
 	<div id="logo">
-		<img src="komputer.png" alt="hurtownia komputerowa" />
+		<img src="komputer.png" alt="hurtownia komputerowa">
 	</div>
 	<div id="lista">
 		<ul>
@@ -28,8 +30,15 @@
 		<h2>Hurtownia komputerowa</h2>
 		<form action="sklep.php" method="post">
 			<label>
-				Wybierz kategorię sprzętu<br/>
-				<input type="number" name="kat" />
+				Wybierz kategorię sprzętu<br>
+				<select name="kategoria" id="kategoria">
+					<option value="1"> Procesory </option>
+					<option value="2"> Pamięci RAM </option>
+					<option value="3"> Monitory </option>
+					<option value="4"> Obudowy </option>
+					<option value="5"> Karty graficzne </option>
+					<option value="6"> Dyski twarde </option>
+				</select>
 			</label>
 			<button type="submit">SPRAWDŹ</button>
 		</form>
@@ -37,16 +46,32 @@
 	<div id="glowny">
 		<h1>Podzespoły we wskazanej kategorii</h1>
 		<?php
-		$con = mysqli_connect('localhost', 'root', '', 'sklep');
-		if(!empty($_POST['kat'])) {
-			$kat = $_POST['kat'];
-			$kw = "SELECT podzespoly.nazwa, podzespoly.opis, podzespoly.cena FROM podzespoly, typy WHERE podzespoly.typy_id = typy.id AND typy.id = $kat;";
-			$res = mysqli_query($con, $kw);
-			while($tab = mysqli_fetch_row($res)) {
-				echo "<p>$tab[0] $tab[1] CENA: $tab[2]</p>";
+		$id_polaczenia = mysqli_connect('localhost', 'root', '', 'sklep');
+		if (!empty($_POST['kategoria'])) {
+			$kategoria = $_POST['kategoria'];
+			$zapytanie = <<<KONIEC
+			SELECT
+				podzespoly.nazwa,
+				podzespoly.opis,
+				podzespoly.cena
+			FROM
+				podzespoly
+			JOIN typy 
+			ON podzespoly.typy_id = typy.id
+			WHERE
+				typy.id = $kategoria;
+			KONIEC;
+			$wynik = mysqli_query($id_polaczenia, $zapytanie);
+			while ($row = mysqli_fetch_array($wynik)) {
+				$nazwa = $row['nazwa'];
+				$opis = $row['opis'];
+				$cena = $row['cena'];
+				echo <<<KONIEC
+				<p>$nazwa $opis CENA: $cena</p>
+				KONIEC;
 			}
 		}
-		mysqli_close($con);
+		mysqli_close($id_polaczenia);
 		?>
 	</div>
 	<div id="stopka">
@@ -58,4 +83,5 @@
 		<p>Stronę wykonał: PESEL</p>
 	</div>
 </body>
+
 </html>
