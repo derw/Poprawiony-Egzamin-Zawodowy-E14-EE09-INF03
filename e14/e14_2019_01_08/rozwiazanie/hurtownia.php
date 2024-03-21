@@ -68,10 +68,15 @@
 			while ($row = mysqli_fetch_array($wynik)) {
 				$nazwa = $row['nazwa'];
 				$cena = $row['cena'];
-				$dostepnosc = $row['dostepnosc'] == 1 ? "DOSTĘPNY" : "NIEDOSTĘPNY";
-				echo <<<KONIEC
-				<p>$nazwa CENA: $cena $dostepnosc</p>
-				KONIEC;
+				if (1 == $row['dostepnosc']) {
+					echo <<<KONIEC
+					<p>$nazwa CENA: $cena $dostepnosc DOSTĘPNY</p>
+					KONIEC;
+				} else {
+					echo <<<KONIEC
+					<p>$nazwa CENA: $cena $dostepnosc NIEDOSTĘPNY</p>
+					KONIEC;
+				}
 			}
 		}
 		mysqli_close($id_polaczenia);
