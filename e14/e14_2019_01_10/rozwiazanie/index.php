@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8" />
+	<meta charset="UTF-8">
 	<title>Odżywianie zwierząt</title>
-	<link rel="stylesheet" href="styl4.css" />
+	<link rel="stylesheet" href="styl4.css">
 </head>
 <body>
 	<div id="baner">
@@ -25,11 +25,23 @@
 		<h3>Lista zwierząt</h3>
 		<ul>
 		<?php
-		$con = mysqli_connect('localhost', 'root', '', 'baza');
-		$kw1 = "SELECT zwierzeta.gatunek, odzywianie.rodzaj FROM zwierzeta, odzywianie WHERE zwierzeta.Odzywianie_id = odzywianie.id;";
-		$res1 = mysqli_query($con, $kw1);
-		while($tab = mysqli_fetch_row($res1)) {
-			echo "<li>$tab[0] -> $tab[1]</li>";
+		$id_polaczenia = mysqli_connect('localhost', 'root', '', 'baza');
+		$zapytanie = <<<KONIEC
+		SELECT
+			zwierzeta.gatunek,
+			odzywianie.rodzaj
+		FROM
+			zwierzeta
+		JOIN
+			odzywianie
+		ON
+			zwierzeta.Odzywianie_id=odzywianie.id;
+		KONIEC;
+		$wynik = mysqli_query($id_polaczenia, $zapytanie);
+		while($row = mysqli_fetch_array($wynik)) {
+			$gatunek = $row['gatunek'];
+			$odzywianie = $row['rodzaj'];
+			echo "<li>$gatunek -> $odzywianie</li>";
 		}
 		?>
 		</ul>
@@ -38,23 +50,33 @@
 		<?php
 		if(!empty($_POST['lista'])) {
 			$nr = $_POST['lista'];
-			$wybor = "";
-			if ($nr == 1) $wybor = "Drapieżniki";
-			if ($nr == 2) $wybor = "Roślinożerne";
-			if ($nr == 3) $wybor = "Padlinożerne";
-			if ($nr == 4) $wybor = "Wszystkożerne";
-			$kw2 = "SELECT zwierzeta.id, zwierzeta.gatunek, zwierzeta.wystepowanie FROM zwierzeta, odzywianie WHERE zwierzeta.Odzywianie_id = odzywianie.id AND odzywianie.id = $nr;";
-			echo "<h3>$wybor</h3>";
-			$res2 = mysqli_query($con, $kw2);
-			while($tab = mysqli_fetch_row($res2)) {
-				echo "$tab[0]. $tab[1], $tab[2]<br/>";
+			if ($nr == 1) echo "<h3>Drapieżniki</h3>";
+			if ($nr == 2) echo "<h3>Roślinożerne</h3>";
+			if ($nr == 3) echo "<h3>Padlinożerne</h3>";
+			if ($nr == 4) echo "<h3>Wszystkożerne</h3>";
+			$zapytanie = <<<KONIEC
+			SELECT
+				`id`,
+				`gatunek`,
+				`wystepowanie`
+			FROM
+				`zwierzeta`
+			WHERE
+				`Odzywianie_id` = $nr;
+			KONIEC;
+			$wynik = mysqli_query($id_polaczenia, $zapytanie);
+			while($row = mysqli_fetch_array($wynik)) {
+				$id = $row['id'];
+				$gatunek = $row['gatunek'];
+				$wystepowanie = $row['wystepowanie'];
+				echo "$id. $gatunek, $wystepowanie<br>";
 			}
 		}
-		mysqli_close($con);
+		mysqli_close($id_polaczenia);
 		?>
 	</div>
 	<div id="prawy">
-		<img src="drapieznik.jpg" alt="Wilki" />
+		<img src="drapieznik.jpg" alt="Wilki">
 	</div>
 	<div id="stopka">
 		<a href="http://pl.wikipedia.org" target="_blank">Poczytaj o zwierzętach na WIkipedii</a>,
