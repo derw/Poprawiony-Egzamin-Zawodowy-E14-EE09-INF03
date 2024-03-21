@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8" />
+	<meta charset="UTF-8">
 	<title>Dane o zwierzętach</title>
-	<link rel="stylesheet" href="styl3.css" />
+	<link rel="stylesheet" href="styl3.css">
 </head>
 <body>
 	<div id="baner">
@@ -21,30 +21,36 @@
 		<form action="index.php" method="post">
 			<label>
 				Wybierz gromadę:
-				<input type="number" name="nr" />
+				<input type="number" name="nr">
 			</label>
 			<button type="submit">Wyświetl</button>
 		</form>
 	</div>
 	<div id="lewy">
-		<img src="zwierzeta.jpg" alt="dzikie zwierzeta" />
+		<img src="zwierzeta.jpg" alt="dzikie zwierzeta">
 	</div>
 	<div id="srodkowy">
 		<?php
-		$con = mysqli_connect('localhost', 'root', '', 'baza');
+		$id_polaczenia = mysqli_connect('localhost', 'root', '', 'baza');
 		if(!empty($_POST['nr'])) {
 			$nr = $_POST['nr'];
-			$wybor = "";
-			if ($nr == 1) $wybor = "RYBY";
-			if ($nr == 2) $wybor = "PŁAZY";
-			if ($nr == 3) $wybor = "GADY";
-			if ($nr == 4) $wybor = "PTAKI";
-			if ($nr == 5) $wybor = "SSAKI";
-			$kw1 = "SELECT gatunek, wystepowanie FROM zwierzeta, gromady WHERE zwierzeta.Gromady_id = gromady.id AND gromady.id = $nr;";
-			$res1 = mysqli_query($con, $kw1);
-			echo "<h2>$wybor</h2>";
-			while($tab = mysqli_fetch_row($res1)) {
-				echo "$tab[0], $tab[1]<br/>";
+			if ($nr == 1) echo "<h2>RYBY</h2>";
+			if ($nr == 2) echo "<h2>PŁAZY</h2>";
+			if ($nr == 3) echo "<h2>GADY</h2>";
+			if ($nr == 4) echo "<h2>PTAKI</h2>";
+			if ($nr == 5) echo "<h2>SSAKI</h2>";
+			$zapytanie = <<<KONIEC
+			SELECT
+				gatunek,
+				wystepowanie
+			FROM
+				zwierzeta
+			WHERE
+				Gromady_id = $nr;
+			KONIEC;
+			$wynik = mysqli_query($id_polaczenia, $zapytanie);
+			while($row = mysqli_fetch_array($wynik)) {
+				echo "$row[gatunek], $row[wystepowanie]<br>";
 			}
 		}
 		?>
@@ -52,10 +58,23 @@
 	<div id="prawy">
 		<h2>Wszystkie zwierzęta w bazie</h2>
 		<?php
-			$kw2 = "SELECT zwierzeta.id, zwierzeta.gatunek, gromady.nazwa FROM zwierzeta, gromady WHERE zwierzeta.Gromady_id = gromady.id;";
-			$res2 = mysqli_query($con, $kw2);
-			while($tab = mysqli_fetch_row($res2)) {
-				echo "$tab[0]. $tab[1], $tab[2]<br/>";
+			$zapytanie = <<<KONIEC
+			SELECT
+				zwierzeta.id,
+				zwierzeta.gatunek,
+				gromady.nazwa
+			FROM
+				zwierzeta
+			JOIN
+				gromady
+			ON zwierzeta.Gromady_id = gromady.id
+			KONIEC;
+			$wynik = mysqli_query($id_polaczenia, $zapytanie);
+			while($row = mysqli_fetch_array($wynik)) {
+				$id = $row['id'];
+				$gatunek = $row['gatunek'];
+				$nazwa = $row['nazwa'];
+				echo "$id. $gatunek, $nazwa<br>";
 			}
 		?>
 	</div>
