@@ -43,6 +43,7 @@ Do tej pory poprawione są rozwiązania dotyczące PHP:
 - e14_2019_01_08 – PHP
 - e14_2019_01_09 – PHP
 - e14_2019_01_10 – PHP
+- e14_2019_01_11 – js, grafika
 
 - e14_2019_01_01
 - e14_2019_01_02
