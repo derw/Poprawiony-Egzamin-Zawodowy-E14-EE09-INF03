@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="UTF-8" />
 	<title>Sklep papierniczy</title>
 	<link rel="stylesheet" href="styl.css" />
 </head>
+
 <body>
 	<div id="baner">
 		<h1>W naszym sklepie internetowym kupisz najtaniej</h1>
@@ -12,14 +14,24 @@
 	<div id="lewy">
 		<h3>Promocja 15% obejmuje artykuły</h3>
 		<ul>
-		<?php
-		$con = mysqli_connect('localhost', 'root', '', 'sklep');
-		$kw1 = "SELECT nazwa FROM towary WHERE promocja = 1;";
-		$res1 = mysqli_query($con, $kw1);
-		while($tab = mysqli_fetch_row($res1)) {
-			echo "<li>$tab[0]</li>";
-		}
-		?>
+			<?php
+			$id_polaczenia = mysqli_connect('localhost', 'root', '', 'sklep');
+			$zapytanie = <<<KONIEC
+				SELECT
+					nazwa
+				FROM
+					`towary`
+				WHERE
+					promocja = 1;
+				KONIEC;
+			$wynik = mysqli_query($id_polaczenia, $zapytanie);
+			while ($row = mysqli_fetch_array($wynik)) {
+				$nazwa = $row['nazwa'];
+				echo <<<KONIEC
+					<li>$nazwa</li>";
+				KONIEC;
+			}
+			?>
 		</ul>
 	</div>
 	<div id="srodkowy">
@@ -34,22 +46,28 @@
 			<button type="submit">WYBIERZ</button>
 		</form>
 		<?php
-		if(!empty($_POST['lista'])) {
+		if (!empty($_POST['lista'])) {
 			$produkt = $_POST['lista'];
-			$kw2 = "SELECT cena FROM towary WHERE nazwa = '$produkt';";
-			$res2 = mysqli_query($con, $kw2);
-			while($tab = mysqli_fetch_row($res2)) {
-				$cena = ROUND($tab[0]*0.85,2);
-				echo "$cena";
+			$zapytanie = <<<KONIEC
+				SELECT
+					cena
+				FROM
+					towary
+				WHERE
+					nazwa = $produkty;
+				KONIEC;
+			$wynik = mysqli_query($id_polaczenia, $zapytanie);
+			while ($row = mysqli_fetch_array($wynik)) {
+				echo ROUND($row['cena'] * 0.85, 2);
 			}
 		}
-		mysqli_close($con);
+		mysqli_close($id_polaczenia);
 		?>
 	</div>
 	<div id="prawy">
 		<h3>Kontakt</h3>
 		<p>
-			telefon:123123123<br/>
+			telefon:123123123<br />
 			e-mail: <a href="mailto:bok@sklep.pl">bok@sklep.pl</a>
 		</p>
 		<img src="promocja2.png" alt="promocja" />
@@ -58,4 +76,5 @@
 		<h4>Autor strony PESEL</h4>
 	</div>
 </body>
+
 </html>
