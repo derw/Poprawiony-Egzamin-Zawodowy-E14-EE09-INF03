@@ -53,6 +53,8 @@ Do tej pory poprawione są rozwiązania dotyczące PHP:
 - e14_2019_06_06 – js, grafika
 - e14_2020_01_01 – php
 - e14_2020_01_02 – ja, grafika
+- e14_2020_01_03 – ja, grafika
+
 
 
 - e14_2019_01_01
