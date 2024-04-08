@@ -51,6 +51,7 @@ Do tej pory poprawione są rozwiązania dotyczące PHP:
 - e14_2019_06_04 – PHP
 - e14_2019_06_05 – js, grafika
 - e14_2019_06_06 – js, grafika
+- e14_2020_01_01 – php
 
 
 - e14_2019_01_01

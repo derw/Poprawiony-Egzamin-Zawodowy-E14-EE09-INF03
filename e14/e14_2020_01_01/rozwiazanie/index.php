@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="UTF-8" />
+	<meta charset="UTF-8">
 	<title>Nasz sklep komputerowy</title>
-	<link rel="stylesheet" href="styl8.css" />
+	<link rel="stylesheet" href="styl8.css">
 </head>
+
 <body>
 	<div id="menu">
 		<a href="index.php">Główna</a>
@@ -25,22 +27,38 @@
 				<th>CENA</th>
 			</tr>
 			<?php
-			$con = mysqli_connect('localhost', 'root', '', 'sklep');
-			$kw = "SELECT id, nazwa, opis, cena FROM podzespoly WHERE cena < 1000;";
-			$res = mysqli_query($con, $kw);
-			while($tab = mysqli_fetch_row($res)) {
-				echo "<tr>
-						<td>$tab[0]</td>
-						<td>$tab[1]</td>
-						<td>$tab[2]</td>
-						<td>$tab[3]</td>
-					</tr>";
+			$id_polaczenia = mysqli_connect('localhost', 'root', '', 'sklep');
+			$zapytanie = <<<KONIEC
+			SELECT
+				id,
+				nazwa,
+				opis,
+				cena
+			FROM
+				podzespoly
+			WHERE
+				cena < 1000;
+			KONIEC;
+			$wynik = mysqli_query($id_polaczenia, $zapytanie);
+			while ($row = mysqli_fetch_array($wynik)) {
+				$id = $row['id'];
+				$nazwa = $row['nazwa'];
+				$opis = $row['opis'];
+				$cena = $row['cena'];
+				echo <<<KONIEC
+					<tr>
+						<td>$id</td>
+						<td>$nazwa</td>
+						<td>$opis</td>
+						<td>$cena</td>
+					</tr>
+				KONIEC;
 			}
 			?>
 		</table>
 	</div>
 	<div id="stopka1">
-		<img src="scalak.jpg" alt="promocje na procesory" />
+		<img src="scalak.jpg" alt="promocje na procesory">
 	</div>
 	<div id="stopka2">
 		<h4>Nasz Sklep Komputerowy</h4>
@@ -53,4 +71,5 @@
 		<p>Stronę wykonał: PESEL</p>
 	</div>
 </body>
+
 </html>
