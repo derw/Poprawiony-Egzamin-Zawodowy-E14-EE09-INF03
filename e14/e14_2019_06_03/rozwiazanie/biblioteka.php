@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8" />
+	<meta charset="UTF-8">
 	<title>Biblioteka miejska</title>
-	<link rel="stylesheet" href="style.css" />
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
 	<div id="baner">
@@ -13,11 +13,21 @@
 		<h3>W naszych zbiorach znajdziesz dzieła następujących autorów:</h3>
 		<ul>
 		<?php
-		$con = mysqli_connect('localhost', 'root', '', 'biblioteka');
-		$kw1 = "SELECT imie, nazwisko FROM autorzy;";
-		$res1 = mysqli_query($con, $kw1);
-		while($tab = mysqli_fetch_row($res1)) {
-			echo "<li>$tab[0] $tab[1]</li>";
+		$id_polaczenia = mysqli_connect('localhost', 'root', '', 'biblioteka');
+		$zapytanie = <<<KONIEC
+		SELECT
+			`imie`,
+			`nazwisko`
+		FROM
+			`autorzy`;
+		KONIEC;
+		$wynik = mysqli_query($id_polaczenia, $zapytanie);
+		while($row = mysqli_fetch_array($wynik)) {
+			$imie = $row['imie'];
+			$nazwisko = $row['nazwisko'];
+			echo <<<KONIEC
+			<li>$imie $nazwisko</li>
+			KONIEC;
 		}
 		?>
 		</ul>
@@ -27,15 +37,15 @@
 		<form action="biblioteka.php" method="post">
 			<label>
 				imię:
-				<input type="text" name="imie" /><br/>
+				<input type="text" name="imie"><br>
 			</label>
 			<label>
 				nazwisko:
-				<input type="text" name="nazwisko" /><br/>
+				<input type="text" name="nazwisko"><br>
 			</label>
 			<label>
 				rok urodzenia:
-				<input type="number" name="rok" /><br/>
+				<input type="number" name="rok"><br>
 			</label>
 			<button>DODAJ</button>
 		</form>
@@ -46,19 +56,22 @@
 			$rok = $_POST['rok'];
 			$kod = $imie[0].$imie[1].$nazwisko[0].$nazwisko[1];
 			$kod = strtoupper($kod).$rok[-2].$rok[-1];
-			$kw2 = "INSERT INTO czytelnicy VALUES (NULL, '$imie', '$nazwisko', '$kod');";
-			mysqli_query($con, $kw2);
+			$zapytanie = <<<KONIEC
+			INSERT INTO `czytelnicy`(`imie`, `nazwisko`, `kod`)
+				VALUES('$imie', '$nazwisko', '$kod');
+			KONIEC;
+			mysqli_query($id_polaczenia, $zapytanie);
 			echo "Czytelnik: $imie $nazwisko został dodany do bazy danych";
 		}
-		mysqli_close($con);
+		mysqli_close($id_polaczenia);
 		?>
 	</div>
 	<div id="prawy">
-		<img src="biblioteka.png" alt="książki" />
+		<img src="biblioteka.png" alt="książki">
 		<h4>
-			ul. Czytelnicza 25<br/>
-			12-120 Książkowice<br/>
-			tel.: 123123123<br/>
+			ul. Czytelnicza 25<br>
+			12-120 Książkowice<br>
+			tel.: 123123123<br>
 			e-mail: <a href="mailto:biuro@biblioteka.pl">biuro@biblioteka.pl</a>
 		</h4>
 	</div>

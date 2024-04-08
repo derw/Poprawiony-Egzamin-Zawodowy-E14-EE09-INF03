@@ -1,4 +1,25 @@
-1. SELECT imie, nazwisko FROM autorzy;
-2. INSERT INTO czytelnicy VALUES (NULL, 'Anna', 'Michalak', 'ANMI05');
-3. SELECT ksiazki.tytul FROM ksiazki, kategorie WHERE ksiazki.id_kategoria = kategorie.id AND kategorie.nazwa = 'epika';
-4. SELECT ksiazki.tytul FROM ksiazki, wypozyczenia WHERE ksiazki.id = wypozyczenia.id_ksiazka AND wypozyczenia.id_czytelnik = 3;
+1. 
+SELECT
+    `imie`,
+    `nazwisko`
+FROM
+    `autorzy`;
+2. 
+INSERT INTO `czytelnicy`(`imie`, `nazwisko`, `kod`)
+VALUES('Anna', 'Michalak', 'ANMI05');
+3. 
+SELECT
+    ksiazki.tytul
+FROM
+    ksiazki
+JOIN kategorie ON ksiazki.id_kategoria = kategorie.id
+WHERE
+    kategorie.nazwa = 'epika';
+4. 
+SELECT
+    ksiazki.tytul
+FROM
+    ksiazki
+JOIN wypozyczenia ON ksiazki.id = wypozyczenia.id_ksiazka
+WHERE
+    wypozyczenia.id_czytelnik = 3;

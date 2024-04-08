@@ -45,8 +45,10 @@ Do tej pory poprawione są rozwiązania dotyczące PHP:
 - e14_2019_01_10 – PHP
 - e14_2019_01_11 – js, grafika
 - e14_2019_01_12 – js, grafika
-- e14_2019_06_01 - PHP
-- e14_2019_06_02 - PHP
+- e14_2019_06_01 – PHP
+- e14_2019_06_02 – PHP
+- e14_2019_06_03 – PHP
+
 
 - e14_2019_01_01
 - e14_2019_01_02
