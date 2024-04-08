@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8" />
+	<meta charset="UTF-8">
 	<title>Gromady kręgowców</title>
-	<link rel="stylesheet" href="style12.css" />
+	<link rel="stylesheet" href="style12.css">
 </head>
 <body>
 	<div id="menu">
@@ -16,15 +16,38 @@
 	</div>
 	<div id="lewy">
 		<?php
-		$con = mysqli_connect('localhost', 'root', '', 'baza');
-		$kw1 = "SELECT id, Gromady_id, gatunek, wystepowanie FROM zwierzeta WHERE Gromady_id IN (4, 5);";
-		$res1 = mysqli_query($con, $kw1);
-		while($tab = mysqli_fetch_row($res1)) {
-			if($tab[1] == 4) $gromada = "ptaki";
-			if($tab[1] == 5) $gromada = "ssaki";
-			echo "<p>$tab[0]. $tab[2]</p>";
-			echo "<p>Występowanie: $tab[3], gromada $gromada</p>";
-			echo "<hr/>";
+		$id_polaczenia = mysqli_connect('localhost', 'root', '', 'baza');
+		$zapytanie = <<<KONIEC
+		SELECT
+			`id`,
+			`Gromady_id`,
+			`gatunek`,
+			`wystepowanie`
+		FROM
+			`zwierzeta`
+		WHERE
+			Gromady_id IN(4, 5);
+		KONIEC;
+		$wynik = mysqli_query($id_polaczenia, $zapytanie);
+		while($row = mysqli_fetch_array($wynik)) {
+			$id = $row['id'];
+			$gromady_id = $row['Gromady_id'];
+			$gatuenk = $row['gatunek'];
+			$wystepowanie = $row['wystepowanie'];
+			if($gromady_id == 4) {
+				echo <<<KONIEC
+				<p>$id. $gatuenk</p>
+				<p>Występowanie: $wystepowanie, gromada ptaki</p>
+				<hr>
+				KONIEC;
+			}
+			if($gromady_id == 5) {
+				echo <<<KONIEC
+				<p>$id. $gatuenk</p>
+				<p>Występowanie: $wystepowanie, gromada ssaki</p>
+				<hr>
+				KONIEC;
+			}
 		}
 		?>
 	</div>
@@ -32,15 +55,27 @@
 		<h1>PTAKI</h1>
 		<ol>
 		<?php
-		$kw2 = "SELECT gatunek, obraz FROM zwierzeta WHERE Gromady_id = 4;";
-		$res2 = mysqli_query($con, $kw2);
-		while($tab = mysqli_fetch_row($res2)) {
-			echo "<li><a href='$tab[1]'>$tab[0]</a></li>";
+		$zapytanie = <<<KONIEC
+		SELECT
+			`gatunek`,
+			`obraz`
+		FROM
+			`zwierzeta`
+		WHERE
+			`Gromady_id` = 4
+		KONIEC;
+		$wynik = mysqli_query($id_polaczenia, $zapytanie);
+		while($row = mysqli_fetch_array($wynik)) {
+			$gatunek = $row['gatunek'];
+			$obraz = $row['obraz'];
+			echo <<<KONIEC
+			<li><a href='$obraz'>$gatunek</a></li>
+			KONIEC;
 		}
-		mysqli_close($con);
+		mysqli_close($id_polaczenia);
 		?>
 		</ol>
-		<img src="sroka.jpg" alt="Sroka zwyczajna, gromada ptaki" />
+		<img src="sroka.jpg" alt="Sroka zwyczajna, gromada ptaki">
 	</div>
 	<div id="stopka">
 		Stronę o kręgowcach przygotował: PESEL
