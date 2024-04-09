@@ -32,15 +32,27 @@
                 <?php
                 $id_polaczenia = mysqli_connect('localhost', 'root', '', 'wynajem');
                 $zapytanie = <<<KONIEC
-                SELECT * FROM pokoje";
+                SELECT
+                    `id`,
+                    `nazwa`,
+                    `cena`
+                FROM
+                    `pokoje`
+                WHERE
+                    1
                 KONIEC;
-                $res = mysqli_query($id_polaczenia, $zapytanie);
-                while ($row = mysqli_fetch_array($res)) {
-                    echo "<tr>
-                            <td>$row[0]</td>
-                            <td>$row[1]</td>
-                            <td>$row[2]</td>
-                        </tr>";
+                $wynik = mysqli_query($id_polaczenia, $zapytanie);
+                while ($row = mysqli_fetch_array($wynik)) {
+                    $id = $row['id'];
+                    $nazwa = $row['nazwa'];
+                    $cena = $row['cena'];
+                    echo <<<KONIEC
+                    <tr>
+                        <td>$id</td>
+                        <td>$nazwa</td>
+                        <td>$cena</td>
+                    </tr>
+                    KONIEC;
                 }
                 mysqli_close($id_polaczenia);
                 ?>
