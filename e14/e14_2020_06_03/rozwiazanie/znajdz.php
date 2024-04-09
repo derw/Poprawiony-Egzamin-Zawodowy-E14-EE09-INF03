@@ -15,9 +15,9 @@
         <section id="panelLewy">
             <h3>Kwiaty dla Ciebie!</h3>
             <a href="https://www.swiatkwiatow.pl/">Rozpoznaj kwiaty</a>
-            <br />
+            <br>
             <a href="./znajdz.php">Znajdź kwiaciarnię</a>
-            <br />
+            <br>
             <img src="./gozdzik.jpg" alt="Goździk">
         </section>
         <section id="panelPrawy">
@@ -32,11 +32,21 @@
             <?php
             if (isset($_POST['wyslij'])) {
                 $miasto = $_POST['miasto'];
-                $con = mysqli_connect('localhost', 'root', '', 'kwiaciarnia');
-                $q = "SELECT nazwa, ulica FROM kwiaciarnie WHERE miasto = '$miasto';";
-                $res = mysqli_query($con, $q);
-                while ($row = mysqli_fetch_array($res)) {
-                    echo "$row[0], $row[1]";
+                $id_polaczenia = mysqli_connect('localhost', 'root', '', 'kwiaciarnia');
+                $zapytanie = <<<KONIEC
+                SELECT
+                    nazwa,
+                    ulica
+                FROM
+                    kwiaciarnie
+                WHERE
+                    miasto = 'Malbork';
+                KONIEC;
+                $wynik = mysqli_query($id_polaczenia, $zapytanie);
+                while ($row = mysqli_fetch_array($wynik)) {
+                    $nazwa = $row['nazwa'];
+                    $ulica = $row['ulica'];
+                    echo "$nazwa, $ulica";
                 }
             }
             ?>
