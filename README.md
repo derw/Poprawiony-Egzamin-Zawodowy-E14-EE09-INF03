@@ -55,6 +55,7 @@ Do tej pory poprawione są rozwiązania dotyczące PHP:
 - e14_2020_01_02 – js, grafika
 - e14_2020_01_03 – js, grafika
 - e14_2020_01_04 – PHP
+- e14_2020_06_01 – js, grafika
 
 
 
