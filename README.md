@@ -26,15 +26,15 @@ https://www.php.net/manual/en/language.types.string.php#language.types.string.sy
 
 Do tej pory poprawione są rozwiązania dotyczące PHP:
 
-- e14_2018_01_01
-- e14_2018_01_02
-- e14_2018_01_03
-- e14_2018_01_04
-- e14_2018_06_01
-- e14_2018_06_04
-- e14_2018_06_05
-- e14_2018_06_06
-- e14_2019_01_03
+- e14_2018_01_01 – PHP
+- e14_2018_01_02 – PHP
+- e14_2018_01_03 – PHP
+- e14_2018_01_04 – PHP
+- e14_2018_06_01 – PHP
+- e14_2018_06_04 – PHP
+- e14_2018_06_05 – js, grafika
+- e14_2018_06_06 – js, grafika
+- e14_2019_01_03 – PHP
 - e14_2019_01_04
 - e14_2019_01_05
 - e14_2019_01_06 – PHP, ciasteczka, js, grafika
@@ -58,6 +58,7 @@ Do tej pory poprawione są rozwiązania dotyczące PHP:
 - e14_2020_06_01 – js, grafika
 - e14_2020_06_02 – PHP
 - e14_2020_06_03 – PHP
+- e14_2020_06_04 – PHP
 
 
 

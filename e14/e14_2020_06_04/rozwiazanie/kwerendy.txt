@@ -1,5 +1,30 @@
-1. CREATE TABLE zamowienia (id INT UNSIGNED NOT NULL, imie TEXT NULL, nazwisko TEXT NULL, adres_email TEXT NULL, liczba_choinek INT NULL, liczba_mikolajow INT NULL, liczba_reniferow INT NULL, info BOOLEAN NULL);
-2. ALTER TABLE zamowienia ADD PRIMARY KEY(id);
-3. CREATE USER 'klient' IDENTIFIED BY 'klient123';
+1.  
+CREATE TABLE `sklep`.`zamowienia`(
+    `id` INT UNSIGNED NOT NULL,
+    `imie` VARCHAR(255) NULL,
+    `nazwisko` VARCHAR(255) NULL,
+    `adres_email` VARCHAR(255) NULL,
+    `liczba_choinek` INT NULL,
+    `liczba_mikolajow` INT NULL,
+    `liczba_reniferow` INT NULL,
+    `info` BOOLEAN NULL
+);
+2.
+ALTER TABLE
+    `zamowienia` CHANGE `id` `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    ADD PRIMARY KEY(`id`);
+3. CREATE USER 'klient'@'localhost' IDENTIFIED BY 'klient123';
 4. GRANT INSERT ON sklep.* TO klient
-5. INSERT INTO zamowienia VALUES (NULL, 'Jan', 'Kowalski', 'jKowalski@poczta.pl', NULL, NULL, NULL, NULL)
+5. 
+INSERT INTO `zamowienia`(
+    `id`,
+    `imie`,
+    `nazwisko`,
+    `adres_email`
+)
+VALUES(
+    1,
+    'Jan',
+    'Kowalski',
+    'jKowalski@poczta.pl'
+)
