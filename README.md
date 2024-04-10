@@ -34,12 +34,13 @@ Do tej pory poprawione są rozwiązania dotyczące PHP:
 - e14_2018_06_04 – PHP
 - e14_2018_06_05 – js, grafika
 - e14_2018_06_06 – js, grafika
+- e14_2019_01_01 – PHP
+- e14_2019_01_02 – js, grafika
 - e14_2019_01_03 – PHP
-- e14_2019_01_04
-- e14_2019_01_05
+- e14_2019_01_04 – js, grafika
+- e14_2019_01_05 – PHP
 - e14_2019_01_06 – PHP, ciasteczka, js, grafika
 - e14_2019_01_07 – PHP
-- e14_2019_01_08 – PHP
 - e14_2019_01_08 – PHP
 - e14_2019_01_09 – PHP
 - e14_2019_01_10 – PHP
@@ -62,8 +63,6 @@ Do tej pory poprawione są rozwiązania dotyczące PHP:
 
 
 
-- e14_2019_01_01
-- e14_2019_01_02
 
 - ee09_2022_01_05
 
