@@ -60,6 +60,7 @@ Do tej pory poprawione są rozwiązania dotyczące PHP:
 - e14_2020_06_02 – PHP
 - e14_2020_06_03 – PHP
 - e14_2020_06_04 – PHP
+- e14_2019_01_02 – js, grafika
 
 
 
